@@ -73,6 +73,7 @@ int main()
  //std::cout<<"LRU "<<std::endl;
     //osSim.printLRU();
 	osSim.FetchFrom(740);
+	
 	osSim.PrintRAM();
 	// Frame	Page	PID
 	// 0		7		2
