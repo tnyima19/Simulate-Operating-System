@@ -25,11 +25,7 @@ int RAM::GetFront(){
 
 
 void RAM::InsertNoUpdate(int page, int PID, int frame){
-     //std::cout<<"i am at insert RAM"<<std::endl;
-    //std::cout<<"page: "<<page<<" PID: "<<PID<<std::endl;
-    //std::cout<<"Total frame: "<<total_frame<<std::endl;
-    //std::cout<<"frameSize: "<<frame_size<<std::endl;
-    //std::cout<<"LRU back frame: "<<LRU.back()<<std::endl;
+ 
     if(total_frame< frame_size){
         Node new_node(PID,page);
         //table.push_back(new_node);
@@ -56,11 +52,7 @@ void RAM::InsertNoUpdate(int page, int PID, int frame){
 //check if all process are present in page[0],
 // if they are delete it then update the page and PID, 
 void RAM::Insert(int page, int PID, int frame){
-    //std::cout<<"i am at insert RAM"<<std::endl;
-    //std::cout<<"page: "<<page<<" PID: "<<PID<<std::endl;
-    //std::cout<<"Total frame: "<<total_frame<<std::endl;
-    //std::cout<<"frameSize: "<<frame_size<<std::endl;
-    //std::cout<<"LRU back frame: "<<LRU.back()<<std::endl;
+
     if(total_frame< frame_size){
         Node new_node(PID,page);
         //table.push_back(new_node);
@@ -96,10 +88,7 @@ void RAM::PrintLRU(){
 }
 
 void RAM::InsertUpdate(CPU &a_core){
-   // std::cout<<"i am at insert RAM"<<std::endl;
-    //std::cout<<"page: "<<page<<" PID: "<<PID<<std::endl;
-    //std::cout<<"Total frame: "<<total_frame<<std::endl;
-    //std::cout<<"frameSize: "<<frame_size<<std::endl;
+ 
     int frame = a_core.GetFrame();
     int page = a_core.GetPage();
     int PID = a_core.GetPID();
@@ -204,27 +193,16 @@ void RAM::UpdateFramePage(int page_counter, int process_id, int frame_number  ){
         if(*itr == frame_number){// if found
             Node new_node(process_id, page_counter);
             table[frame_number] = new_node;
-            //std::cout<<new_node.page<<std::endl;
-            //std::cout<<new_node.PID<<std::endl;
-
-            //std::cout<<"i am at UPDATE FRAME PAGE Frame:"<<frame_number<<std::endl;
             UpdateFrame(frame_number);
-            //int new_frame = *itr;
-            //LRU.erase(itr);
-            //LRU.emplace_front(*itr);
             return;
         }
         ++itr;
     }
 
-        //LRU.pop_back();
-        //LRU.push_front(frame_number);
-
 }
 
 void RAM::EraseFromMemory(int PID){
-    //table[frame].page = 0;
-    //table[frame].PID = 0;
+
     auto i = table.begin();
 
     while(i != table.end()){
@@ -252,11 +230,9 @@ void RAM::EraseFromMemory(int PID){
 }
 void RAM::Print(){
     std::cout<<"Frame   "<<"Page    "<<"    PID"<<std::endl;
-    int count = 0;
-    //std::cout<<total_frame<<std::endl;
-    //auto itr;
+    
     for(int i=0;i<total_frame;++i){
-        //std::cout<<"COUNT: "<<count<<std::endl;
+     
         if(table[i].GetPage() == 0 && table[i].GetPID() == 0){
             std::cout<<i<<"         "<<"        "<<std::endl;
         }else{
