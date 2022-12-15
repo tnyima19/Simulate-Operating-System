@@ -1,27 +1,51 @@
 #include "Process.h"
 
-/*
+Process::Process(){
+    PID = 0;
+    priority = 0;
+    frame = 0;
+}
+
 Process::Process(int processID, int priority){
     
     PID = processID;
     priority = priority;
-    next = nullptr;
     //std::cout<<"PID:"<<PID<<std::endl;
     //std::cout<<"priority"<<priority<<std::endl;
 
 }
+  Process::Process(int processID, int priority, int new_frame, int page){
+        PID = processID;
+        this->priority = priority;
+        //next = nullptr;
+        frame = new_frame;
+        pageCounter = page;
 
-int Process::getpriority(){
+        }
+  bool Process::operator <(const Process &a) const{
+       return a.priority > this->priority;
+    }
+
+int Process::GetPriority() const {
         return priority;
     }
 
-int Process::getPID(){
+int Process::GetPID() const {
         return PID;
     }
-Process* Process::getNext(){
-    return next;
+void Process::SetFrame(int new_frame){
+    frame = new_frame;
 }
-*/
+void Process::SetPageCounter(int new_page){
+    pageCounter = new_page;
+}
+int Process::GetPageCounter(){
+    return pageCounter;
+}
+int Process::GetFrame(){
+    return frame;
+}
+
 
 // void friend Process:: std::ostream &operator<(std::ostream &out, const Points2D &some_points2) {
 //      //out<<"{";

@@ -38,9 +38,10 @@
     void CPUScheduling::PrintReadyQueue(){
         std::priority_queue<Process> new_q;
         new_q = q;
+        
         std::cout<<"Ready-Queue: ";
-        while(!new_q.empty()&& new_q.top().priority != 0){ // something is wrong here,
-            int top = new_q.top().PID;
+        while(!new_q.empty()&& new_q.top().GetPriority() != 0){ // something is wrong here,
+            int top = new_q.top().GetPID();
             if(top != 0){
             std::cout<<top<<" ";
             

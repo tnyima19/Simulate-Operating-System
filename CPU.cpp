@@ -10,10 +10,10 @@
 
     }
     void CPU::UpdatePage(int page){
-        p.pageCounter= page;
+        p.SetPageCounter(page);
     }
     void CPU::UpdateFrame(int frame){
-        p.frame = frame;
+        p.SetFrame(frame);
     }
 
     void CPU::Insert(Process curr_process){
@@ -22,25 +22,25 @@
         //ram.update(curr_process.PID, curr_process.priority);
     }
     int CPU::PrintPriority(){
-    return p.priority;
+    return p.GetPriority();
     }
     int CPU::PrintID(){
-    return p.PID;
+    return p.GetPID();
     }
     bool CPU::IsEmpty(){
-        if(p.PID == 0 && p.priority == 0){
+        if(p.GetPID() == 0 && p.GetPriority() == 0){
             return true;
         }else
             return false;
     }
     int CPU::GetFrame(){
-        return p.frame;
+        return p.GetFrame();
     }
     int CPU::GetPID(){
-        return p.PID;
+        return p.GetPID();
     }
     int CPU::GetPage(){
-        return p.pageCounter;
+        return p.GetPageCounter();
     }
     Process CPU::GetProcess(){
         return p;

@@ -57,7 +57,7 @@ void SimulatedOS::NewProcess(int priority){
             one_core.Insert(new_process);
             
             //int page_number = 0;
-            int processid = new_process.PID;
+            int processid = new_process.GetPID();
             //std::cout<<"right before ram"<<std::endl;
             ram.Insert(page_number, processid, frame);
             ++frame;
@@ -66,17 +66,17 @@ void SimulatedOS::NewProcess(int priority){
             if(one_core.GetProcess()<new_process){
                 Process temp = one_core.GetProcess();
                 one_core.Insert(new_process);
-                if(temp.PID != 0 && temp.priority != 0){ // TO CHECK IF CPU IS IDLE IF pid = 0 and priority == 0 its idle
+                if(temp.GetPID() != 0 && temp.GetPriority() != 0){ // TO CHECK IF CPU IS IDLE IF pid = 0 and priority == 0 its idle
                     schedule.Insert(one_core, temp);// 
                 }
             int page_number = 0;    
-            int processid = new_process.PID;
+            int processid = new_process.GetPID();
             ram.Insert(page_number, processid,frame);
             frame++;
 
             }else{
                 int page_number = 0;    
-                int processid = new_process.PID;
+                int processid = new_process.GetPID();
                 schedule.Insert(one_core, new_process);
                 ram.Insert(page_number, processid,frame);
                 frame++;
@@ -95,7 +95,7 @@ void SimulatedOS::Exit(){
             //Process process_to_quit = one_core.getProcess();
             one_core.Erase();
         }
-        ram.EraseFromMemory(process_to_quit.PID);
+        ram.EraseFromMemory(process_to_quit.GetPID());
 }
 void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName){
     // no file reading only simulation, 
@@ -116,7 +116,7 @@ void SimulatedOS::PrintLRU(){
 void SimulatedOS::FetchFrom(unsigned int memoryAddress){
         PageCounter = memoryAddress/ pageSize;
        if(!ram.FindPagePID(PageCounter, one_core.GetPID())){
-        ram.Insert(PageCounter,one_core.GetProcess().PID,frame);
+        ram.Insert(PageCounter,one_core.GetProcess().GetPID(),frame);
         one_core.UpdatePage(PageCounter);
         one_core.UpdateFrame(ram.GetFront()); // because ram is already inserted, and frame palce is updated
         ++frame;
@@ -135,15 +135,15 @@ void SimulatedOS::DiskJobCompleted(int diskNumber){
 
         schedule.Insert(one_core, disk_process);
         disks[diskNumber].pop();
-        if(!ram.CanFrameViaPagePID(disk_process.pageCounter, disk_process.PID)){
+        if(!ram.CanFrameViaPagePID(disk_process.GetPageCounter(), disk_process.GetPID())){
 
         //update it in ram. 
          //std::cout<<"DISK JOB COMPLETED: "<<disk_process.frame<<"PID:"<<disk_process.PID<<"PAGECOUNTER: "<<disk_process.pageCounter<<std::endl;
-        ram.Insert(disk_process.pageCounter, disk_process.PID, disk_process.frame); //THIS IS CORRECT
-        ram.UpdateCPUFramePage(one_core, disk_process.pageCounter, disk_process.frame); //
+        ram.Insert(disk_process.GetPageCounter(), disk_process.GetPID(), disk_process.GetFrame()); //THIS IS CORRECT
+        ram.UpdateCPUFramePage(one_core, disk_process.GetPageCounter(), disk_process.GetFrame()); //
         }else{
             // if we can find it just update the particular frame number to the top. 
-            ram.UpdateFrame(disk_process.frame);
+            ram.UpdateFrame(disk_process.GetFrame());
 
         }
         }else{
@@ -183,7 +183,7 @@ void SimulatedOS::PrintDisk(int diskNumber){
         std::cout<<"Disk "<<diskNumber<<": ";
         Process p = disks[diskNumber].front();
         // total_disks++;
-        std::cout<<"PID "<< p.PID<<","; 
+        std::cout<<"PID "<< p.GetPID()<<","; 
         disks[diskNumber].GetWords();
         std::cout<<std::endl;
 
@@ -206,7 +206,7 @@ void SimulatedOS::PrintDiskQueue(int diskNumber){
         }else{
         
         while(!q.empty()){
-            std::cout<<"PID: "<<q.front().PID<<std::endl;
+            std::cout<<"PID: "<<q.front().GetPID()<<std::endl;
             q.pop();
         }
         }
