@@ -15,7 +15,6 @@ SimulatedOS::SimulatedOS(int diskNum, int RAMAmount, int pages){
         std::vector<Disk> d(diskNum);
         disks = d;
         int frameSize = amountRAM/pageSize;
-        //total_disks = 0;
         PageCounter = 0;
         RAM ram2(frameSize);
         ram  = ram2;
@@ -24,7 +23,6 @@ SimulatedOS::SimulatedOS(int diskNum, int RAMAmount, int pages){
 
 SimulatedOS::SimulatedOS(int diskNum, int RAMAmount, int pages, int counting){
      numOfDisk = diskNum;
-        //std::vector<Disk> diskTotal(diskNum);
         std::vector<Disk> d(diskNum);
         frame = 0;
         disks = d;
@@ -37,9 +35,7 @@ SimulatedOS::SimulatedOS(int diskNum, int RAMAmount, int pages, int counting){
         one_core = a_core;
         CPUScheduling sche;
         schedule = sche;
-
         int frameSize = amountRAM/pageSize;
-        //total_disks = 0;
         RAM ram2(frameSize);
         ram = ram2;
         PageCounter = 0;
@@ -114,7 +110,7 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName){
         one_core.Insert(schedule.GetPriorityProcess());
         ram.UpdateFramePage(one_core.GetPage(), one_core.GetPID(), one_core.GetFrame());
 }
-void SimulatedOS::printLRU(){
+void SimulatedOS::PrintLRU(){
     ram.PrintLRU();
 }
 void SimulatedOS::FetchFrom(unsigned int memoryAddress){
