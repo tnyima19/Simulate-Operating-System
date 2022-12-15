@@ -2,7 +2,8 @@
 Name: Tenzing Nyima
 CSCI 340
 Date: Dec 14 2022
-Project
+Professor Pavel Shostak
+Project on Operating System Simulation
 
 */
 
