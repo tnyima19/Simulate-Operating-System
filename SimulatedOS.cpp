@@ -103,7 +103,7 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName){
         // with a given number, 
 
         // we need disk and RAM etc. 
-        disks[diskNumber].words = fileName;
+        disks[diskNumber].SetWord(fileName);
         disks[diskNumber].push(one_core.GetProcess());
  
         one_core.Erase();// empty the process, 
@@ -129,12 +129,12 @@ void SimulatedOS::FetchFrom(unsigned int memoryAddress){
 void SimulatedOS::DiskJobCompleted(int diskNumber){
  // the process on top of the FIFO list, returns back to the ready queu. 
         //std::cout<<disks[diskNumber].q.front().PID<<std::endl;
-        if(!disks[diskNumber].q.empty()){
-        Process disk_process = disks[diskNumber].q.front();
+        if(!disks[diskNumber].CheckQueueEmpty()){
+        Process disk_process = disks[diskNumber].front();
        
 
         schedule.Insert(one_core, disk_process);
-        disks[diskNumber].q.pop();
+        disks[diskNumber].pop();
         if(!ram.CanFrameViaPagePID(disk_process.pageCounter, disk_process.PID)){
 
         //update it in ram. 
@@ -175,15 +175,17 @@ void SimulatedOS::PrintRAM(){
 
 }
 void SimulatedOS::PrintDisk(int diskNumber){
-       if(disks[diskNumber].q.empty()){
+       if(disks[diskNumber].CheckQueueEmpty()){
             std::cout<<"Disk "<<diskNumber<<": Idle"<<std::endl;
             return;
         }
 
         std::cout<<"Disk "<<diskNumber<<": ";
-        Process p = disks[diskNumber].q.front();
+        Process p = disks[diskNumber].front();
         // total_disks++;
-        std::cout<<"PID "<< p.PID<<","<<disks[diskNumber].words<<std::endl;
+        std::cout<<"PID "<< p.PID<<","; 
+        disks[diskNumber].GetWords();
+        std::cout<<std::endl;
 
 
 
@@ -196,7 +198,7 @@ void SimulatedOS::PrintDiskQueue(int diskNumber){
             std::cout<<"Instruction ignored: no disk with such number exists"<<std::endl;
             return;
         }
-        std::queue<Process> q = disks[diskNumber].q;
+        std::queue<Process> q = disks[diskNumber].GetQueue();
         q.pop();// because we only print the next one to be served
         if(q.empty()){
             std::cout<<"Disk "<<diskNumber<<" I/O-queue: Empty"<<std::endl;

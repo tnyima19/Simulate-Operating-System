@@ -131,7 +131,7 @@ bool RAM::FindPagePID(int page, int PID){
 
     auto itr = table.begin();
     while( itr != table.end()){
-        if(itr->second.PID == PID && itr->second.page == page){
+        if(itr->second.GetPID() == PID && itr->second.GetPage() == page){
             return true;
         }
         itr++;
@@ -176,7 +176,7 @@ void RAM::UpdateFrame(int frame_number){
 int RAM::GetFrameViaPagePID(int page, int PID){
     auto itr = table.begin();
     while(itr != table.end()){
-        if(itr->second.page == page && itr->second.PID == PID)
+        if(itr->second.GetPage() == page && itr->second.GetPID() == PID)
             return itr->first;
 
     ++itr;
@@ -186,7 +186,7 @@ int RAM::GetFrameViaPagePID(int page, int PID){
 bool RAM::CanFrameViaPagePID(int page, int PID){
 auto itr = table.begin();
     while(itr != table.end()){
-        if(itr->second.page == page && itr->second.PID == PID)
+        if(itr->second.GetPage() == page && itr->second.GetPID() == PID)
             return true;
 
     ++itr;
@@ -229,10 +229,10 @@ void RAM::EraseFromMemory(int PID){
 
     while(i != table.end()){
 
-    if(i->second.PID == PID){
+    if(i->second.GetPID() == PID){
         //std::cout<<"I am at erase from mem:"<<PID<<std::endl;
-        i->second.PID = 0;
-        i->second.page = 0;
+        i->second.SetPID(0);
+        i->second.SetPage(0);
          int frame = i->first;
         auto itr = LRU.begin();
         while(itr != LRU.end()){
@@ -257,10 +257,10 @@ void RAM::Print(){
     //auto itr;
     for(int i=0;i<total_frame;++i){
         //std::cout<<"COUNT: "<<count<<std::endl;
-        if(table[i].page == 0 && table[i].PID == 0){
+        if(table[i].GetPage() == 0 && table[i].GetPID() == 0){
             std::cout<<i<<"         "<<"        "<<std::endl;
         }else{
-        std::cout<<i<<"         "<<table[i].page<<"         "<<table[i].PID<<std::endl;
+        std::cout<<i<<"         "<<table[i].GetPage()<<"         "<<table[i].GetPID()<<std::endl;
         //++count;
         }
         //++count;

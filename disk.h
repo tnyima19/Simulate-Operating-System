@@ -13,27 +13,18 @@ Project on Operating System Simulation
 #include<iostream>
 
 struct Disk{
-    Disk(){
-        
-    }
-    Disk(Process newProcess, int num){
-        q.push(newProcess);
-        //processes = newProcess;
-        diskNum = num;
-        words = "";
-    }
-    void pop(){
-        q.pop();
-    }
-    void push(Process p){
-        q.push(p);
-    }
-    Process front(){
-        return q.front();
-    }
-
+    Disk();
+    Disk(Process newProcess, int num);
+    void pop();
+    void push(Process p);
+    Process front();
+    void SetWord(std::string new_word);
+    bool CheckQueueEmpty();
+    void GetWords();
+    std::queue<Process> GetQueue();
     
     //Process processes;
+private:
     int diskNum;
     std::string words;
     std::queue<Process> q;
