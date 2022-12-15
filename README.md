@@ -1,10 +1,11 @@
-TICTAC is a terminal game where you can play tictac with a friend.
+OPERATING SYSTEM SIMULATION
+Operaint System Simulation is a project which simulates how operating system interacts with CPU,RAM, disk, CPU Scheduling, Processes.
 
 📝 `NOTE - PASTE PART 2 SNIPPET HERE:` Paste the README template for part 2 of this assignment here at the top. This will show a history of your development process, which users stories you completed and how your app looked and functioned at each step.
 
 ---
 
-## TicTac
+## OPERATING SYSTEM SIMULATION
 
 ### User Stories
 `TODO://` In the **User Stories section below**, add an `x` in the `-[ ]` like this `- [x]` for any user story you complete. (🚫 Remove this paragraph after checking off completed user stories)
