@@ -142,7 +142,7 @@ void SimulatedOS::DiskJobCompleted(int diskNumber){
         if(!ram.CanFrameViaPagePID(disk_process.pageCounter, disk_process.PID)){
 
         //update it in ram. 
-         std::cout<<"DISK JOB COMPLETED: "<<disk_process.frame<<"PID:"<<disk_process.PID<<"PAGECOUNTER: "<<disk_process.pageCounter<<std::endl;
+         //std::cout<<"DISK JOB COMPLETED: "<<disk_process.frame<<"PID:"<<disk_process.PID<<"PAGECOUNTER: "<<disk_process.pageCounter<<std::endl;
         ram.Insert(disk_process.pageCounter, disk_process.PID, disk_process.frame); //THIS IS CORRECT
         ram.UpdateCPUFramePage(one_core, disk_process.pageCounter, disk_process.frame); //
         }else{
@@ -197,7 +197,7 @@ void SimulatedOS::PrintDiskQueue(int diskNumber){
         // print the qaueue in theD
         //std::cout<<"i am at PRINT DISK QUEUE:"<<std::endl;
         if(diskNumber > numOfDisk){
-            std::cout<<"Instruction ignored: no disk with suchNumber exists"<<std::endl;
+            std::cout<<"Instruction ignored: no disk with such number exists"<<std::endl;
             return;
         }
         std::queue<Process> q = disks[diskNumber].q;

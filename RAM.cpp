@@ -230,19 +230,20 @@ void RAM::EraseFromMemory(int PID){
     while(i != table.end()){
 
     if(i->second.PID == PID){
-        std::cout<<"I am at erase from mem:"<<PID<<std::endl;
+        //std::cout<<"I am at erase from mem:"<<PID<<std::endl;
         i->second.PID = 0;
         i->second.page = 0;
          int frame = i->first;
         auto itr = LRU.begin();
         while(itr != LRU.end()){
             if(*itr == frame){
-                //std::cout<<"ITR: "<<*itr<<std::endl;
+                
                 LRU.erase(itr);
+                LRU.push_back(frame);
             }
             itr++;
         }
-        LRU.push_back(frame);
+       // LRU.push_back(frame);
     }
     i++;
     }
@@ -250,7 +251,7 @@ void RAM::EraseFromMemory(int PID){
 
 }
 void RAM::Print(){
-    std::cout<<"Frame   "<<"Page    "<<"PID"<<std::endl;
+    std::cout<<"Frame   "<<"Page    "<<"    PID"<<std::endl;
     int count = 0;
     //std::cout<<total_frame<<std::endl;
     //auto itr;
@@ -259,7 +260,7 @@ void RAM::Print(){
         if(table[i].page == 0 && table[i].PID == 0){
             std::cout<<i<<"         "<<"        "<<std::endl;
         }else{
-        std::cout<<i<<"     "<<table[i].page<<"         "<<table[i].PID<<std::endl;
+        std::cout<<i<<"         "<<table[i].page<<"         "<<table[i].PID<<std::endl;
         //++count;
         }
         //++count;

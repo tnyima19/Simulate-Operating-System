@@ -13,7 +13,7 @@ int main()
 	osSim.NewProcess(10);
 	osSim.NewProcess(5);
 
-	//osSim.PrintRAM();
+	osSim.PrintRAM();
 	// Frame	Page	PID
 	// 0		0		1
 	// 1		0		2
@@ -110,8 +110,8 @@ int main()
 
 	return 0;
 }
-
 /*
+
 int main()
 {   
     //std::cout<<"I "<<std::endl;
