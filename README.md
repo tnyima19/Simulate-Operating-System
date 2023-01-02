@@ -19,6 +19,23 @@ Operaint System Simulation is a project which simulates how operating system int
 - [ ] (2pt) Print the linked list to find out which one is least used frame and most used frame in RAM.
 
 
+### HOW DOES IT WORK
+create an a new .cpp file and include all the required files from the github. 
+create an SimulatedOS object and put in the required number of disks, RAM and page Size. and insert processes with required priorities that you like.(for example:
+int main(){
+SimulatedOS os{1(number of disks), 300(bytes of RAM), 100(page size)};
+osSim.NewProcess(10);
+osSim.New Process(5);
+return 0;
+
+}
+
+### WHAT CAN YOU DO?
+- you can create new processes using the function(NewProcess(int priority))
+- you can terminate a running process using the function (Exit()).
+-you can Print the priority of currently running process using the function (PringCPU()).
+
+
 ### App Walkthrough GIF
 `TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
 
