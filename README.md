@@ -33,7 +33,7 @@ return 0;
 ### WHAT CAN YOU DO?
 - you can create new processes using the function(NewProcess(int priority))
 - you can terminate a running process using the function (Exit()).
--you can Print the priority of currently running process using the function (PringCPU()).
+- you can Print the priority of currently running process using the function (PringCPU()).
 
 
 ### App Walkthrough GIF
